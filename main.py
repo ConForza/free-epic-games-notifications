@@ -29,11 +29,10 @@ for game in free_games:
     game_price_promo = game['price']['totalPrice']['fmtPrice']['discountPrice']
     game_title = game['title']
     game_url = ""
-    if game["urlSlug"]:
-        if game['offerType'] == "BUNDLE":
-            game_url = f"https://store.epicgames.com/en-US/bundles/{game['urlSlug']}"
-        else:
-            game_url = f"https://store.epicgames.com/en-US/p/{game['urlSlug']}"
+
+    if game["catalogNs"]["mappings"]:
+        url_type = "bundles" if game['offerType'] == "BUNDLE" else "p"
+        game_url = f"https://store.epicgames.com/en-US/{url_type}/{game['catalogNs']['mappings'][0]['pageSlug']}"
 
     game_promotions = game['promotions']['promotionalOffers']
 
